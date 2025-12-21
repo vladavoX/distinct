@@ -1,0 +1,85 @@
+---
+title: Quick Start
+description: Getting Started with distinct - A JavaScript Utility for Unique Values
+icon: Album
+---
+
+import { Tabs, TabsList, TabsContent, TabsTrigger } from 'fumadocs-ui/components/tabs';
+
+## Introduction
+
+Welcome to distinct, a JavaScript utility library that returns unique values from arrays. Whether you're working with primitive data types or complex objects, **distinct** simplifies the process of filtering out duplicates.
+
+## Installation
+
+<Tabs defaultValue='npm'>
+  <TabsList>
+    <TabsTrigger value="npm">npm</TabsTrigger>
+    <TabsTrigger value="pnpm">pnpm</TabsTrigger>
+    <TabsTrigger value="yarn">yarn</TabsTrigger>
+    <TabsTrigger value="bun">bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+    ```bash
+    npm install distinct
+    ```
+  </TabsContent>
+  <TabsContent value="pnpm">
+    ```bash
+    pnpm add distinct
+    ```
+  </TabsContent>
+  <TabsContent value="yarn">
+    ```bash
+    yarn add distinct
+    ```
+  </TabsContent>
+  <TabsContent value="bun">
+    ```bash
+    bun add distinct
+    ```
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+Import the `distinct` or `distinctBy` functions from the library and use them to filter out duplicate values from your arrays.
+
+### Use it for primitive values
+
+```javascript
+import { distinct } from 'distinct';
+
+// For arrays of primitive values
+const numbers = [1, 2, 2, 3, 4, 4, 5];
+const uniqueNumbers = distinct(numbers);
+console.log(uniqueNumbers); // Output: [1, 2, 3, 4, 5]
+```
+
+### Use it for complex objects
+
+```javascript
+import { distinct } from 'distinct';
+
+// For arrays of objects
+const users = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+  { id: 1, name: 'Alice' },
+];
+const uniqueUsers = distinct(users);
+console.log(uniqueUsers); // Output: [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
+```
+
+### Use it with a key extractor function
+
+If you need to determine uniqueness based on a specific property or computed value, use `distinctBy` with a key extractor function.
+
+```javascript
+import { distinctBy } from 'distinct';
+
+// Using a key extractor function
+const numbers = [1, 2, 2, 3, 4, 4, 5];
+const uniqueEvenNumbers = distinctBy(numbers, (num) => num % 2);
+console.log(uniqueEvenNumbers); // Output: [1, 2]
+```

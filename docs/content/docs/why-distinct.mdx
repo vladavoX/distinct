@@ -1,0 +1,73 @@
+---
+title: Why Distinct?
+description: Learn why and when to use the distinct utility in your projects.
+icon: CircleQuestionMark
+---
+
+## Should you use `distinct` and `distinctBy`?
+
+The `distinct` and `distinctBy` utilities are designed to help developers easily filter out duplicate values from arrays. They are built on top of lodash's `isEqual` function, ensuring deep equality checks for complex objects.
+
+### Recommended native JavaScript alternatives
+
+If your project doesn't require deep equality checks or you're only working with primitive data types, we recommend creating your own utilities using native JavaScript methods like `Set` or `Array.prototype.filter` for better performance and reduced bundle size.
+
+```javascript
+// Using Set for primitive values
+const numbers = [1, 2, 2, 3, 4, 4, 5];
+const uniqueNumbers = [...new Set(numbers)];
+console.log(uniqueNumbers); // Output: [1, 2, 3, 4, 5]
+```
+
+Or when working with objects, you can use a combination of `Map` and `JSON.stringify` for a simple uniqueness check:
+
+```javascript
+// Using Map and JSON.stringify for objects
+const objects = [{ id: 1 }, { id: 2 }, { id: 1 }];
+const uniqueObjects = Array.from(
+  new Map(objects.map(obj => [JSON.stringify(obj), obj])).values()
+);
+console.log(uniqueObjects); // Output: [{ id: 1 }, { id: 2 }]
+```
+
+#### When does native JavaScript not suffice?
+
+However, if your application requires deep equality checks for complex nested objects or arrays, or if you need a reliable and tested solution, then using `distinct` and `distinctBy` can be beneficial. They handle various edge cases and provide a straightforward API for filtering duplicates.
+
+Here is a simple example where `JSON.stringify` fails to identify duplicates due to property order:
+
+```javascript
+const objects = [{ id: 1, name: 'Alice' }, { name: 'Alice', id: 1 }];
+const uniqueObjects = Array.from(
+  new Map(objects.map(obj => [JSON.stringify(obj), obj])).values()
+);
+console.log(uniqueObjects); // Output: [{ id: 1, name: 'Alice' }, { name: 'Alice', id: 1 }]
+```
+
+In this case, using `distinct` would correctly identify the objects as duplicates.
+
+```javascript
+import { distinct } from 'distinct';
+
+const objects = [{ id: 1, name: 'Alice' }, { name: 'Alice', id: 1 }];
+const uniqueObjects = distinct(objects);
+console.log(uniqueObjects); // Output: [{ id: 1, name: 'Alice' }]
+```
+
+In cases where you need to filter duplicates based on a specific property, `distinctBy` is very useful:
+
+```javascript
+import { distinctBy } from 'distinct';
+
+const users = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+  { id: 1, name: 'Alice' },
+];
+const uniqueUsers = distinctBy(users, user => user.id);
+console.log(uniqueUsers); // Output: [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
+```
+
+### Conclusion
+
+In summary, while native JavaScript methods are often sufficient for simple use cases, `distinct` and `distinctBy` provide robust solutions for scenarios requiring deep equality checks and complex object comparisons. Evaluate your project's needs to determine the best approach.

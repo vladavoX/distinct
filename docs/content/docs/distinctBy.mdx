@@ -1,0 +1,101 @@
+---
+title: distinctBy
+description: API Reference for distinctBy - A JavaScript Utility for Unique Values Based on a Key
+---
+
+import * as path from "node:path";
+import { fileURLToPath } from 'node:url';
+
+export const dir = path.dirname(fileURLToPath(import.meta.url));
+
+`distinctBy` first checks for primitive keys and uses a `Set` for optimal performance. For complex objects, it leverages lodash's `isEqual` function to ensure deep equality checks based on the computed keys.
+
+<AutoTypeTable path={path.join(dir, "./types.ts")} name="DistinctBy" />
+
+### Primitive examples
+
+Using `distinctBy` with primitive values and a key function:
+
+```javascript
+import { distinctBy } from 'distinct';
+
+const numbers = [1, 2, 2, 3, 4, 4, 5];
+const uniqueNumbers = distinctBy(numbers, x => x % 2);
+console.log(uniqueNumbers); // Output: [1, 2] (1 is odd, 2 is even)
+```
+
+Preserves the order of first occurrences based on the key function:
+
+```javascript
+import { distinctBy } from 'distinct';
+
+const mixed = [1, 2, 3, 4, 5, 6];
+const uniqueMixed = distinctBy(mixed, x => x % 3);
+console.log(uniqueMixed); // Output: [1, 2, 3] (keys are 1, 2, 0)
+```
+
+### Complex object examples
+
+Using `distinctBy` with complex objects:
+
+```javascript
+import { distinctBy } from 'distinct';
+
+const objects = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+  { id: 1, name: 'Charlie' },
+  { id: 3, name: 'David' }
+];
+const uniqueObjects = distinctBy(objects, obj => obj.id);
+console.log(uniqueObjects);
+// Output:
+// [
+//   { id: 1, name: 'Alice' },
+//   { id: 2, name: 'Bob' },
+//   { id: 3, name: 'David' }
+// ]
+```
+
+Using `distinctBy` with nested objects:
+
+```javascript
+import { distinctBy } from 'distinct';
+
+const nestedObjects = [
+  { user: { id: 1, name: 'Alice' } },
+  { user: { id: 2, name: 'Bob' } },
+  { user: { id: 1, name: 'Charlie' } }
+];
+const uniqueNestedObjects = distinctBy(nestedObjects, obj => obj.user.id);
+console.log(uniqueNestedObjects);
+// Output:
+// [
+//   { user: { id: 1, name: 'Alice' } },
+//   { user: { id: 2, name: 'Bob' } }
+// ]
+```
+
+Handles arrays of arrays:
+
+```javascript
+import { distinctBy } from 'distinct';
+const arrayOfArrays = [
+  [1, 2],
+  [3, 4],
+  [1, 2],
+  [5, 6]
+];
+const uniqueArrayOfArrays = distinctBy(arrayOfArrays, arr => arr.join(','));
+console.log(uniqueArrayOfArrays);
+// Output:
+// [
+//   [1, 2],
+//   [3, 4],
+//   [5, 6]
+// ]
+```
+
+### Conclusion
+
+The `distinctBy` function is a powerful utility for filtering arrays based on a specified key function. It works seamlessly with both primitive values and complex objects, preserving the order of first occurrences while ensuring uniqueness based on the provided key.

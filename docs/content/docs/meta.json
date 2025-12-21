@@ -1,0 +1,12 @@
+{
+  "title": "Guides",
+  "pages": [
+    "---Introduction---",
+    "index",
+    "why-distinct",
+    "---Reference---",
+    "distinct",
+    "distinctBy"
+  ],
+  "defaultOpen": true
+}

@@ -1,0 +1,96 @@
+---
+title: distinct
+description: API Reference for distinct - A JavaScript Utility for Unique Values
+---
+
+import * as path from "node:path";
+import { fileURLToPath } from 'node:url';
+
+export const dir = path.dirname(fileURLToPath(import.meta.url));
+
+`distinct` first checks for primitive values and uses a `Set` for optimal performance. For complex objects, it leverages lodash's `isEqual` function to ensure deep equality checks.
+
+<AutoTypeTable path={path.join(dir, "./types.ts")} name="Distinct" />
+
+### Primitive examples
+
+Simple usage with primitive values:
+
+```javascript
+import { distinct } from 'distinct';
+
+// For arrays of primitive values
+const numbers = [1, 2, 2, 3, 4, 4, 5];
+const uniqueNumbers = distinct(numbers);
+console.log(uniqueNumbers); // Output: [1, 2, 3, 4, 5]
+```
+
+Preserves the order of first occurrences:
+
+```javascript
+import { distinct } from 'distinct';
+
+const mixed = [1, '1', 2, 2, '2', 1];
+const uniqueMixed = distinct(mixed);
+console.log(uniqueMixed); // Output: [1, '1', 2, '2']
+```
+
+Treats `NaN`, `0`, and `-0` as equal:
+
+```javascript
+import { distinct } from 'distinct';
+
+const values = [NaN, NaN, 0, -0];
+const uniqueValues = distinct(values);
+console.log(uniqueValues); // Output: [NaN, 0]
+```
+
+Handles `null` and `undefined` correctly:
+
+```javascript
+import { distinct } from 'distinct';
+
+const values = [null, undefined, null, undefined];
+const uniqueValues = distinct(values);
+console.log(uniqueValues); // Output: [null, undefined]
+```
+
+### Complex object examples
+
+For arrays of complex objects:
+
+```javascript
+import { distinct } from 'distinct';
+
+const objects = [{ id: 1 }, { id: 2 }, { id: 1 }];
+const uniqueObjects = distinct(objects);
+console.log(uniqueObjects); // Output: [{ id: 1 }, { id: 2 }]
+```
+
+Handles nested objects and arrays:
+
+```javascript
+import { distinct } from 'distinct';
+
+const nested = [
+  { id: 1, details: { age: 30 } },
+  { id: 2, details: { age: 25 } },
+  { id: 1, details: { age: 30 } },
+];
+const uniqueNested = distinct(nested);
+console.log(uniqueNested); // Output: [{ id: 1, details: { age: 30 } }, { id: 2, details: { age: 25 } }]
+```
+
+Handles reversed property order in objects:
+
+```javascript
+import { distinct } from 'distinct';
+
+const objects = [{ id: 1, name: 'Alice' }, { name: 'Alice', id: 1 }];
+const uniqueObjects = distinct(objects);
+console.log(uniqueObjects); // Output: [{ id: 1, name: 'Alice' }]
+```
+
+### Conclusion
+
+The `distinct` function provides a robust solution for filtering unique values from arrays, whether they contain primitive types or complex objects. By combining efficient handling of primitives with deep equality checks for objects, it ensures accurate and reliable results in a variety of scenarios.
