@@ -46,7 +46,7 @@ describe('distinct', () => {
 			expect(output).toEqual([true, false]);
 		});
 
-		test.only('treats NaN as equal and 0 and -0 as equal', () => {
+		test('treats NaN as equal and 0 and -0 as equal', () => {
 			const input = [NaN, NaN, 0, -0];
 			const output = distinct(input);
 
