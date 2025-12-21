@@ -6,16 +6,8 @@
 version: 2
 updates:
   - package-ecosystem: "bun"
+    open-pull-requests-limit: 5
+    rebase-strategy: "disabled"
     directory: "/"
-    schedule:
-      interval: "daily"
-
-  - package-ecosystem: "bun"
-    directory: "/docs"
-    schedule:
-      interval: "daily"
-
-  - package-ecosystem: "bun"
-    directory: "/packages/distinct"
     schedule:
       interval: "daily"
