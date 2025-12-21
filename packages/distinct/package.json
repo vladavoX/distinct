@@ -62,7 +62,7 @@
 		"typescript": "^5"
 	},
 	"dependencies": {
-		"lodash-es": "^4.17.21"
+		"lodash-es": "^4.17.22"
 	},
 	"engines": {
 		"node": ">=20"
