@@ -14,4 +14,4 @@ updates:
     groups:
       fumadocs:
         patterns:
-          - "fumadocs/**"
+          - "fumadocs*"
