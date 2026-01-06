@@ -15,3 +15,14 @@ updates:
       fumadocs:
         patterns:
           - "fumadocs*"
+      react:
+        patterns:
+          - "react*"
+          - "@types/react*"
+      css:
+        patterns:
+          - "tailwind*"
+          - "postcss*"
+          - "tw*"
+          - "clsx"
+          - "class-variance-authority"
