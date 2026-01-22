@@ -2,7 +2,7 @@
 	"name": "@vox1337/distinct",
 	"description": "A utility library that provides functions to remove duplicate values from primitive and complex arrays.",
 	"type": "module",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"license": "MIT",
 	"author": "Vladimir Aleksic",
 	"maintainers": [

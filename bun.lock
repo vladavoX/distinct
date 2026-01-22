@@ -43,7 +43,7 @@
     },
     "packages/distinct": {
       "name": "@vox1337/distinct",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "dependencies": {
         "lodash-es": "^4.17.23",
       },
