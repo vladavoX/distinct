@@ -4,11 +4,9 @@
 		"build:all": "turbo run build",
 		"build:packages": "bun run --cwd packages/** build",
 		"build:docs": "bun run --cwd docs build",
-		"build:examples": "bun run --cwd examples/** build",
 		"dev": "turbo run dev",
 		"dev:package": "bun run --cwd packages/** dev",
 		"dev:docs": "bun run --cwd docs dev",
-		"dev:examples": "bun run --cwd examples/** dev",
 		"test": "bun run --cwd packages/** test",
 		"biome": "biome check .",
 		"biome:fix": "biome check --write ."
