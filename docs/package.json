@@ -20,7 +20,7 @@
     "fumadocs-mdx": "15.0.4",
     "fumadocs-typescript": "^5.2.6",
     "fumadocs-ui": "16.8.10",
-    "lucide-react": "^0.562.0",
+    "lucide-react": "^1.27.0",
     "next": "16.2.6",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
